@@ -1,0 +1,35 @@
+<mat-toolbar
+  color="primary"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <span>Incident management system</span>
+  <nav>
+    <ul fxLayout="row" fxLayoutGap="16px">
+      <li>
+        <a
+          [routerLink]="['/incidents']"
+          routerLinkActive="active-link"
+          mat-button
+          >Incidents</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="['/new-incident']"
+          routerLinkActive="active-link"
+          mat-button
+          >New Incident</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="['/process-incident']"
+          routerLinkActive="active-link"
+          mat-button
+          >Process Incident</a
+        >
+      </li>
+    </ul>
+  </nav>
+</mat-toolbar>

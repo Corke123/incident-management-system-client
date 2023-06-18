@@ -6,18 +6,22 @@ import { ProcessIncidentComponent } from './incidents/process-incident/process-i
 
 const routes: Routes = [
   {
-    path: 'incidents', component: IncidentsMapComponent
+    path: 'incidents',
+    component: IncidentsMapComponent,
   },
   {
-    path: 'new-incident', component: CreateIncidentComponent
+    path: 'new-incident',
+    component: CreateIncidentComponent,
   },
   {
-    path: 'process-incident', component: ProcessIncidentComponent
-  }
+    path: 'process-incident',
+    component: ProcessIncidentComponent,
+  },
+  { path: '', redirectTo: '/incidents', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

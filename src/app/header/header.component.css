@@ -1,0 +1,11 @@
+li {
+  list-style-type: none;
+}
+
+li a:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.active-link {
+  background: rgba(0, 0, 0, 0.2);
+}
