@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,8 @@ import { ProcessIncidentComponent } from './incidents/process-incident/process-i
 import { IncidentsMapComponent } from './incidents/incidents-map/incidents-map.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
+import { initializeKeycloak } from './keycloak-initializer';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 @NgModule({
   declarations: [
@@ -17,16 +19,24 @@ import { MaterialModule } from './material/material.module';
     IncidentsMapComponent,
     CreateIncidentComponent,
     ProcessIncidentComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MaterialModule
+    KeycloakAngularModule,
+    MaterialModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -14,7 +14,7 @@
           >Incidents</a
         >
       </li>
-      <li>
+      <li *ngIf="isUser">
         <a
           [routerLink]="['/new-incident']"
           routerLinkActive="active-link"
@@ -22,7 +22,7 @@
           >New Incident</a
         >
       </li>
-      <li>
+      <li *ngIf="isModerator">
         <a
           [routerLink]="['/process-incident']"
           routerLinkActive="active-link"
