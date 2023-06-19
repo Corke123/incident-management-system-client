@@ -5,4 +5,5 @@ export const environment = {
     realm: 'incident-management-system',
     clientId: 'ims-app',
   },
+  backendUrl: 'http://localhost:8080/api/v1/',
 };

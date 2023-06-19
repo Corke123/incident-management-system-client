@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
 import { initializeKeycloak } from './auth/keycloak-initializer';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    HttpClientModule,
     KeycloakAngularModule,
     MaterialModule,
   ],
