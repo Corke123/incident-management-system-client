@@ -10,7 +10,7 @@ import { ProcessIncidentComponent } from './incidents/process-incident/process-i
 import { IncidentsMapComponent } from './incidents/incidents-map/incidents-map.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
-import { initializeKeycloak } from './keycloak-initializer';
+import { initializeKeycloak } from './auth/keycloak-initializer';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 @NgModule({

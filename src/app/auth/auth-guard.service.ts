@@ -29,8 +29,6 @@ export class AuthGuardService extends KeycloakAuthGuard {
       });
     }
 
-    console.log(route.data['roles']);
-
     // Get the roles required from the route.
     const requiredRoles = route.data['roles'];
 
@@ -38,8 +36,6 @@ export class AuthGuardService extends KeycloakAuthGuard {
     if (!Array.isArray(requiredRoles) || requiredRoles.length === 0) {
       return true;
     }
-
-    console.log(requiredRoles.every((role) => this.roles.includes(role)));
 
     // Allow the user to proceed if all the required roles are present.
     return requiredRoles.every((role) => this.roles.includes(role));
