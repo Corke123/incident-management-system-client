@@ -6,4 +6,5 @@ export const environment = {
     clientId: 'ims-app',
   },
   backendUrl: 'http://localhost:8080/api/v1/',
+  googleMapsApiKey: 'YOUR_API_KEY',
 };
