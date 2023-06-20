@@ -49,7 +49,6 @@
       </div>
       <div fxLayout="column">
         <google-map
-          *ngIf="apiLoaded | async"
           [center]="center"
           [zoom]="zoom"
           (mapClick)="addMarker($event)"

@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IncidentService } from '../incident.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable, catchError, map, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.development';
-import { MapService } from 'src/app/map/map.service';
+import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-create-incident-dialog',
@@ -19,7 +16,6 @@ export class CreateIncidentDialogComponent implements OnInit {
   lng = 17.1908958;
   center: google.maps.LatLngLiteral = { lat: 44.7721881, lng: 17.1908958 };
   zoom = 15;
-  apiLoaded: Observable<boolean>;
 
   incidentForm = new FormGroup({
     description: new FormControl<string | null>(null, [
@@ -37,11 +33,9 @@ export class CreateIncidentDialogComponent implements OnInit {
 
   constructor(
     private incidentService: IncidentService,
-    private dialogRef: MatDialogRef<CreateIncidentDialogComponent>,
-    mapService: MapService
-  ) {
-    this.apiLoaded = mapService.loadMap();
-  }
+    private snackbarService: SnackbarService,
+    private dialogRef: MatDialogRef<CreateIncidentDialogComponent>
+  ) {}
 
   ngOnInit(): void {
     this.getLocation();
@@ -74,10 +68,14 @@ export class CreateIncidentDialogComponent implements OnInit {
             });
           }
         },
-        (error) => console.log(error)
+        (error) => {
+          this.snackbarService.showSnackBar('Unable to load current position');
+        }
       );
     } else {
-      alert('Geolocation is not supported by this browser.');
+      this.snackbarService.showSnackBar(
+        'Geolocation is not supported by this browser.'
+      );
     }
   }
 
