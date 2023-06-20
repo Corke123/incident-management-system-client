@@ -1,0 +1,15 @@
+.dialog-actions {
+  padding: 8px;
+}
+
+.image-container {
+  flex-shrink: 0;
+  max-width: 100%;
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+}

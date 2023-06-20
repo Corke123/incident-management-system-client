@@ -14,14 +14,6 @@
           >Incidents</a
         >
       </li>
-      <li *ngIf="isUser">
-        <a
-          [routerLink]="['/new-incident']"
-          routerLinkActive="active-link"
-          mat-button
-          >New Incident</a
-        >
-      </li>
       <li *ngIf="isModerator">
         <a
           [routerLink]="['/process-incident']"

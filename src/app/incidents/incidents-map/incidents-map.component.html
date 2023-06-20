@@ -1,1 +1,14 @@
-<p>incidents-map works!</p>
+<section class="container">
+  <div fxLayout="row" fxLayoutAlign="end" class="incidents-header">
+    <button
+      *ngIf="isLoggedIn"
+      mat-raised-button
+      color="primary"
+      (click)="onCreateIncident()"
+      class="new-incident-button"
+    >
+      <mat-icon>add</mat-icon>Create
+    </button>
+  </div>
+  <p>incidents-map works!</p>
+</section>
