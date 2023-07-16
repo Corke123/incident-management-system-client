@@ -1,2 +1,8 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div fxFlexFill fxLayout="column">
+  <div fxFlex="none">
+    <app-header></app-header>
+  </div>
+  <section fxFlex>
+    <router-outlet *ngIf="apiLoaded | async"></router-outlet>
+  </section>
+</div>
