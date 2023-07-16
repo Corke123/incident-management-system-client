@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable, map, catchError, of } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -7,10 +9,19 @@ import { environment } from 'src/environments/environment.development';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  apiLoaded!: Observable<boolean>;
+
+  constructor(private httpClient: HttpClient) {}
+
   ngOnInit(): void {
-    const head = <HTMLDivElement>document.head;
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=visualization`;
-    head.appendChild(script);
+    this.apiLoaded = this.httpClient
+      .jsonp(
+        `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=visualization`,
+        'callback'
+      )
+      .pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
   }
 }

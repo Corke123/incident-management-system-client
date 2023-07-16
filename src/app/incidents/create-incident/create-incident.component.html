@@ -1,0 +1,116 @@
+<div fxFlexFill fxLayout="column" class="container">
+  <h4>Create new incident</h4>
+  <form
+    [formGroup]="incidentForm"
+    (ngSubmit)="onSubmit()"
+    fxFlex
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+    fxLayoutGap="16px"
+  >
+    <div
+      fxFlex
+      fxLayout="row"
+      fxLayoutAlign="space-between start"
+      fxLayoutGap="16px"
+    >
+      <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between start"
+          fxLayoutGap="16px"
+        >
+          <mat-form-field fxFlex>
+            <mat-label>Type</mat-label>
+            <mat-select
+              id="typeId"
+              formControlName="typeId"
+              (selectionChange)="onTypeSelected($event.value)"
+            >
+              <mat-option *ngFor="let type of types" [value]="type.id">
+                {{ type.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="incidentForm.get('typeId')?.hasError('required')"
+              >Type is required</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <mat-label>Subtype</mat-label>
+            <mat-select id="subtypeId" formControlName="subtypeId">
+              <mat-option *ngFor="let subtype of subtypes" [value]="subtype.id">
+                {{ subtype.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea
+            [rows]="6"
+            matInput
+            id="description"
+            formControlName="description"
+            #description
+          ></textarea>
+          <mat-hint align="end">{{ description.value.length }}/2048</mat-hint>
+          <mat-error
+            *ngIf="incidentForm.get('description')?.hasError('required')"
+            >Description is required</mat-error
+          >
+          <mat-error
+            *ngIf="incidentForm.get('description')?.hasError('maxlength')"
+            >Description maximum length is 2048 characters</mat-error
+          >
+        </mat-form-field>
+        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="16px">
+          <input
+            type="file"
+            style="display: none"
+            (change)="onFileSelected($event)"
+            #fileInput
+          />
+          <button
+            mat-stroked-button
+            type="button"
+            color="primary"
+            (click)="fileInput.click()"
+          >
+            Choose Image
+          </button>
+          <div>
+            <img [src]="url" alt="" />
+          </div>
+        </div>
+      </div>
+      <div
+        fxFlex
+        fxFlexAlign="stretch"
+        fxLayout="column"
+        fxLayoutAlign="start stretch"
+        #mapParent
+      >
+        <mat-hint>Click on map to set incident location</mat-hint>
+        <google-map
+          [center]="center"
+          [zoom]="zoom"
+          (mapClick)="addMarker($event.latLng)"
+          [width]="mapParent.offsetWidth"
+          [height]="740"
+        >
+          <map-marker [position]="{ lat, lng }"></map-marker>
+        </google-map>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px">
+      <a [routerLink]="['/incidents']" mat-raised-button color="warn">Cancel</a>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="incidentForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

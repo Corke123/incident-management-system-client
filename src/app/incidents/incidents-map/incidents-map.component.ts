@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IncidentService } from '../incident.service';
 import { Incident } from '../incident.model';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateIncidentDialogComponent } from '../create-incident-dialog/create-incident-dialog.component';
-import { KeycloakService } from 'keycloak-angular';
+import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-incidents-map',
@@ -12,38 +11,23 @@ import { KeycloakService } from 'keycloak-angular';
 })
 export class IncidentsMapComponent implements OnInit {
   incidents: Incident[] = [];
-  isLoggedIn = false;
+  center: google.maps.LatLngLiteral = { lat: 44.7721881, lng: 17.1908958 };
+  zoom = 15;
 
   constructor(
     private incidentService: IncidentService,
-    private keycloakService: KeycloakService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
-    this.keycloakService
-      .isLoggedIn()
-      .then((result) => (this.isLoggedIn = result));
     this.incidentService.getIncidents().subscribe({
       next: (incidents: Incident[]) => {
         this.incidents = incidents;
-        console.log(incidents);
       },
       error: () => {
-        console.log('Unable to get incidents');
+        this.snackbarService.showSnackBar('Unable to get incidents!');
       },
-    });
-  }
-
-  onCreateIncident(): void {
-    const dialogRef = this.dialog.open(CreateIncidentDialogComponent, {
-      width: '1100px',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.incidents.push(result);
-      }
     });
   }
 }

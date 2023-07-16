@@ -11,24 +11,25 @@ import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
 import { initializeKeycloak } from './auth/keycloak-initializer';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { HttpClientModule } from '@angular/common/http';
-import { CreateIncidentDialogComponent } from './incidents/create-incident-dialog/create-incident-dialog.component';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IncidentsMapComponent,
-    CreateIncidentDialogComponent,
     ProcessIncidentComponent,
     HeaderComponent,
+    CreateIncidentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    HttpClientJsonpModule,
     HttpClientModule,
     ReactiveFormsModule,
     KeycloakAngularModule,

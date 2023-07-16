@@ -1,14 +1,10 @@
 <section class="container">
-  <div fxLayout="row" fxLayoutAlign="end" class="incidents-header">
-    <button
-      *ngIf="isLoggedIn"
-      mat-raised-button
-      color="primary"
-      (click)="onCreateIncident()"
-      class="new-incident-button"
-    >
-      <mat-icon>add</mat-icon>Create
-    </button>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <google-map [center]="center" [zoom]="zoom" height="800px" width="1800px">
+      <map-marker
+        *ngFor="let incident of incidents"
+        [position]="{ lat: incident.latitude, lng: incident.longitude }"
+      ></map-marker>
+    </google-map>
   </div>
-  <p>incidents-map works!</p>
 </section>
