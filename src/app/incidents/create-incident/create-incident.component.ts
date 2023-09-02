@@ -127,7 +127,6 @@ export class CreateIncidentComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.incidentForm.value);
     if (!this.incidentForm.valid) {
       return;
     }
@@ -136,16 +135,16 @@ export class CreateIncidentComponent implements OnInit {
       description: this.incidentForm.value.description!,
       latitude: this.incidentForm.value.latitude!,
       longitude: this.incidentForm.value.longitude!,
-      image: this.incidentForm.value.image!,
-      typeId: this.incidentForm.value.typeId!,
-      subtypeId: this.incidentForm.value.subtypeId,
+      typeId: this.incidentForm.value.subtypeId
+        ? this.incidentForm.value.subtypeId
+        : this.incidentForm.value.typeId!,
     };
-    this.incidentService.uploadIncident(incidentRequest).subscribe({
+    const image = this.incidentForm.value.image!;
+    this.incidentService.uploadIncident(incidentRequest, image).subscribe({
       next: (createdIncident) => {
         this.snackbarService.showSnackBar('Incident added. TODO redirect');
       },
       error: (error) => {
-        console.log(error);
         this.snackbarService.showSnackBar('Error occured');
       },
     });
