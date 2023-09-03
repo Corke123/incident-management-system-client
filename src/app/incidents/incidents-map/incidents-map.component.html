@@ -1,6 +1,12 @@
 <section class="container">
   <div fxLayout="row" fxLayoutAlign="center center">
-    <google-map [center]="center" [zoom]="zoom" height="800px" width="1800px">
+    <google-map
+      id="google-map"
+      [center]="center"
+      [zoom]="zoom"
+      height="800px"
+      width="1800px"
+    >
       <map-marker
         *ngFor="let incident of incidents"
         [position]="{ lat: incident.latitude, lng: incident.longitude }"

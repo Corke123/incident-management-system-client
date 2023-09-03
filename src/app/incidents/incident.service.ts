@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Incident } from './incident.model';
@@ -10,8 +10,20 @@ import { Observable } from 'rxjs';
 export class IncidentService {
   constructor(private http: HttpClient) {}
 
-  public getIncidents() {
-    return this.http.get<Incident[]>(`${environment.backendUrl}incidents`);
+  public getIncidents(
+    longitude: number | undefined,
+    latitude: number | undefined,
+    radius: number | undefined
+  ) {
+    let queryParams = new HttpParams();
+
+    if (longitude) queryParams = queryParams.append('longitude', longitude);
+    if (latitude) queryParams = queryParams.append('latitude', latitude);
+    if (radius) queryParams = queryParams.append('radius', radius);
+
+    return this.http.get<Incident[]>(`${environment.backendUrl}incidents`, {
+      params: queryParams,
+    });
   }
 
   public getModeratorIncidents() {
