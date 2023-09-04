@@ -1,11 +1,56 @@
-<section class="container">
-  <div fxLayout="row" fxLayoutAlign="center center">
+<section fxFlexFill class="container" fxLayout="column">
+  <h4>Manage incidents</h4>
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select (selectionChange)="onTypeSelected($event.value)">
+        <mat-option *ngFor="let type of types" [value]="type.id">
+          {{ type.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Subtype</mat-label>
+      <mat-select
+        [disabled]="subtypesDisabled"
+        (selectionChange)="onSubtypeSelected($event.value)"
+      >
+        <mat-option *ngFor="let subtype of subtypes" [value]="subtype.id">
+          {{ subtype.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Created at</mat-label>
+      <mat-select (selectionChange)="onPeriodChanged($event.value)">
+        <mat-option value="">all</mat-option>
+        <mat-option value="1">last day</mat-option>
+        <mat-option value="7">last 7 days</mat-option>
+        <mat-option value="30">last month</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      class="reset-btn"
+      mat-raised-button
+      color="primary"
+      (click)="resetFilters()"
+    >
+      Reset filters
+    </button>
+  </div>
+  <div
+    fxFlex
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    id="map-parent"
+    #mapParent
+  >
     <google-map
       id="google-map"
       [center]="center"
       [zoom]="zoom"
-      height="800px"
-      width="1800px"
+      [height]="mapParent.offsetHeight"
+      [width]="mapParent.offsetWidth"
     >
       <map-marker
         *ngFor="let incident of incidents"

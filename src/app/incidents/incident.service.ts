@@ -10,16 +10,8 @@ import { Observable } from 'rxjs';
 export class IncidentService {
   constructor(private http: HttpClient) {}
 
-  public getIncidents(
-    longitude: number | undefined,
-    latitude: number | undefined,
-    radius: number | undefined
-  ) {
-    let queryParams = new HttpParams();
-
-    if (longitude) queryParams = queryParams.append('longitude', longitude);
-    if (latitude) queryParams = queryParams.append('latitude', latitude);
-    if (radius) queryParams = queryParams.append('radius', radius);
+  public getIncidents(params: IncidentParams) {
+    let queryParams = new HttpParams({ fromObject: {...params} });
 
     return this.http.get<Incident[]>(`${environment.backendUrl}incidents`, {
       params: queryParams,
@@ -61,4 +53,12 @@ export class IncidentService {
       type: 'application/json',
     });
   }
+}
+
+export interface IncidentParams {
+  type?: string;
+  period?: string;
+  lat?: string;
+  lng?: string;
+  radius?: string;
 }
