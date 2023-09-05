@@ -52,7 +52,6 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.fetchIncidents({});
     this.fetchTypes();
     this.route.queryParams.subscribe((params) => this.fetchIncidents(params));
   }
@@ -108,7 +107,13 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   resetFilters() {
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { type: null, period: null, lat: null, lng: null, radius: null },
+      queryParams: {
+        type: null,
+        period: null,
+        lat: null,
+        lng: null,
+        radius: null,
+      },
       queryParamsHandling: 'merge',
     });
   }
@@ -147,9 +152,9 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
       return undefined;
     }
 
-    return Math.sqrt(
-      Math.pow(bounds.getNorthEast().lat() - mapCenter.lat(), 2) +
-        Math.pow(bounds.getNorthEast().lng() - mapCenter.lng(), 2)
+    return google.maps.geometry.spherical.computeDistanceBetween(
+      bounds.getNorthEast(),
+      mapCenter
     );
   }
 

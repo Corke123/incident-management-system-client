@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.apiLoaded = this.httpClient
       .jsonp(
-        `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=visualization`,
+        `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=visualization&libraries=geometry`,
         'callback'
       )
       .pipe(
