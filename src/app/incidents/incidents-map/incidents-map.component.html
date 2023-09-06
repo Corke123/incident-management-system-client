@@ -1,6 +1,14 @@
 <section fxFlexFill class="container" fxLayout="column">
   <h4>Incidents</h4>
   <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+    <mat-form-field *ngIf="isModerator">
+      <mat-label>Status</mat-label>
+      <mat-select multiple (selectionChange)="onStatusSelected($event.value)">
+        <mat-option value="PENDING">PENDING</mat-option>
+        <mat-option value="APPROVED">APPROVED</mat-option>
+        <mat-option value="DELETED">DELETED</mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field>
       <mat-label>Type</mat-label>
       <mat-select (selectionChange)="onTypeSelected($event.value)">

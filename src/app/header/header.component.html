@@ -22,14 +22,6 @@
           >Create Incident</a
         >
       </li>
-      <li *ngIf="isModerator">
-        <a
-          [routerLink]="['/process-incident']"
-          routerLinkActive="active-link"
-          mat-button
-          >Process Incident</a
-        >
-      </li>
       <mat-divider [vertical]="true"></mat-divider>
       <li *ngIf="!isLoggedIn">
         <a mat-button (click)="onLogin()">Login</a>

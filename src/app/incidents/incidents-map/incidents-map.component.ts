@@ -7,13 +7,13 @@ import {
 } from '@angular/core';
 import { IncidentParams, IncidentService } from '../incident.service';
 import { Incident } from '../incident.model';
-import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 import { GoogleMap } from '@angular/google-maps';
 import { Subscription } from 'rxjs';
 import { TypeService } from '../types/type.service';
 import { Type } from '../types/type.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-incidents-map',
@@ -32,6 +32,7 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   zoom = 15;
   mapWidth!: number;
   mapHeight!: number;
+  isModerator = false;
 
   circleCenter: google.maps.LatLng | undefined = new google.maps.LatLng(
     44.7721881,
@@ -45,13 +46,14 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private incidentService: IncidentService,
     private typeService: TypeService,
-    public dialog: MatDialog,
     private snackbarService: SnackbarService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private keycloak: KeycloakService
   ) {}
 
   ngOnInit(): void {
+    this.isModerator = this.keycloak.isUserInRole('MODERATOR');
     this.fetchTypes();
     this.route.queryParams.subscribe((params) => this.fetchIncidents(params));
   }
@@ -81,6 +83,10 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
         this.snackbarService.showSnackBar('Unable to get incidents!');
       },
     });
+  }
+
+  onStatusSelected(status: string) {
+    this.updateQueryParam({ status: status });
   }
 
   onTypeSelected(typeId: string) {

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ProcessIncidentComponent } from './incidents/process-incident/process-incident.component';
 import { IncidentsMapComponent } from './incidents/incidents-map/incidents-map.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
@@ -20,7 +19,6 @@ import { CreateIncidentComponent } from './incidents/create-incident/create-inci
   declarations: [
     AppComponent,
     IncidentsMapComponent,
-    ProcessIncidentComponent,
     HeaderComponent,
     CreateIncidentComponent,
   ],
