@@ -27,7 +27,10 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   types: Type[] = [];
   subtypes: Type[] = [];
   subtypesDisabled = true;
+  selectedStatus: string | null = null;
   selectedType: string | null = null;
+  selectedSubType: string | null = null;
+  selectedPeriod: string | null = null;
   center: google.maps.LatLngLiteral = { lat: 44.7721881, lng: 17.1908958 };
   zoom = 15;
   mapWidth!: number;
@@ -86,6 +89,7 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onStatusSelected(status: string) {
+    this.selectedStatus = status;
     this.updateQueryParam({ status: status });
   }
 
@@ -107,13 +111,20 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onPeriodChanged(period: String) {
+    this.selectedPeriod = this.selectedPeriod;
     this.updateQueryParam({ period: period });
   }
 
   resetFilters() {
+    this.selectedStatus = null;
+    this.selectedType = null;
+    this.selectedSubType = null;
+    this.selectedPeriod = null;
+    this.subtypesDisabled = true;
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
+        status: null,
         type: null,
         period: null,
         lat: null,
