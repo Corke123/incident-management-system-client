@@ -3,12 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { IncidentsMapComponent } from './incidents/incidents-map/incidents-map.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
+import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
+import { PageNotFoundComponent } from './incidents/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
     path: 'incidents',
     component: IncidentsMapComponent,
-
+  },
+  {
+    path: 'incidents/not-found',
+    component: PageNotFoundComponent
+  },
+  {
+    path: 'incidents/:id',
+    component: IncidentDetailComponent,
   },
   {
     path: 'create-incident',

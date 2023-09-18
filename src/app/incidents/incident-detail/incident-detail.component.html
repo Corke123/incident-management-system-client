@@ -1,0 +1,63 @@
+<section fxFlexFill class="container" fxLayout="column">
+  <h4 class="title">Incident</h4>
+  <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+    <div
+      fxFlexFill
+      fxFlex="50"
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+      fxLayoutGap="24px"
+      class="details-container"
+    >
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+        <div fxLayout="column" fxLayoutAlign="start start">
+          <h6 class="subtitle">Created</h6>
+          <span>{{ incident.createdAt | date : "d/M/yy, h:mm a" }}</span>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start center">
+          <h6 class="subtitle">Status</h6>
+          <app-status [status]="incident.status"></app-status>
+        </div>
+      </div>
+
+      <h6 class="subtitle">Description</h6>
+      <p class="text">{{ incident.description }}</p>
+    </div>
+    <div
+      fxFlexFill
+      fxFlex="50"
+      fxLayout="row"
+      fxLayoutAlign="end"
+      class="image-container"
+      #imageContainer
+    >
+      <img ngSrc="{{ incident.imageUrl }}" width="620" height="400" priority />
+    </div>
+  </div>
+  <div fxFlex fxLayout="row" class="map-container" #mapParent>
+    <google-map
+      id="google-map"
+      [center]="{ lat: incident.latitude, lng: incident.longitude }"
+      [height]="mapParent.offsetHeight"
+      [width]="mapParent.offsetWidth - 16"
+    >
+      <map-marker
+        [position]="{ lat: incident.latitude, lng: incident.longitude }"
+      ></map-marker>
+    </google-map>
+  </div>
+  <div
+    fxLayout="row"
+    fxLayoutAlign="end center"
+    fxLayoutGap="16px"
+    class="actions-container"
+    *ngIf="isModerator && isPending()"
+  >
+    <button mat-raised-button color="warn" (click)="deleteIncident()">
+      Delete
+    </button>
+    <button mat-raised-button color="primary" (click)="approveIncident()">
+      Approve
+    </button>
+  </div>
+</section>

@@ -14,6 +14,16 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
+import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
+import { PageNotFoundComponent } from './incidents/page-not-found/page-not-found.component';
+import { StatusComponent } from './status/status.component';
+import {
+  IMAGE_LOADER,
+  NgOptimizedImage,
+  provideCloudinaryLoader,
+} from '@angular/common';
+import { environment } from 'src/environments/environment.development';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +31,10 @@ import { CreateIncidentComponent } from './incidents/create-incident/create-inci
     IncidentsMapComponent,
     HeaderComponent,
     CreateIncidentComponent,
+    IncidentDetailComponent,
+    PageNotFoundComponent,
+    StatusComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +42,7 @@ import { CreateIncidentComponent } from './incidents/create-incident/create-inci
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientJsonpModule,
+    NgOptimizedImage,
     HttpClientModule,
     ReactiveFormsModule,
     KeycloakAngularModule,
@@ -41,6 +56,9 @@ import { CreateIncidentComponent } from './incidents/create-incident/create-inci
       multi: true,
       deps: [KeycloakService],
     },
+    provideCloudinaryLoader(
+      `https://res.cloudinary.com/${environment.cloudinaryCloudName}`
+    ),
   ],
   bootstrap: [AppComponent],
 })

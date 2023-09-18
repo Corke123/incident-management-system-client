@@ -11,16 +11,23 @@ export class IncidentService {
   constructor(private http: HttpClient) {}
 
   public getIncidents(params: IncidentParams) {
-    let queryParams = new HttpParams({ fromObject: {...params} });
+    let queryParams = new HttpParams({ fromObject: { ...params } });
 
     return this.http.get<Incident[]>(`${environment.backendUrl}incidents`, {
       params: queryParams,
     });
   }
 
-  public getModeratorIncidents() {
-    return this.http.get<Incident[]>(
-      `${environment.backendUrl}moderator/incidents`
+  public getIncidentById(id: String) {
+    return this.http.get<Incident>(`${environment.backendUrl}incidents/${id}`);
+  }
+
+  public updateIncidentById(id: String, status: string) {
+    return this.http.patch<Incident>(
+      `${environment.backendUrl}incidents/${id}`,
+      {
+        status: status,
+      }
     );
   }
 

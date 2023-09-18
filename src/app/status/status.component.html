@@ -1,0 +1,12 @@
+<div
+  class="status"
+  [ngClass]="getStatus()"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  fxLayoutGap="2px"
+>
+  <mat-icon fontIcon="done" *ngIf="status === 'APPROVED'"></mat-icon>
+  <mat-icon fontIcon="delete" *ngIf="status === 'DELETED'"></mat-icon>
+  <mat-icon fontIcon="cached" *ngIf="status === 'PENDING'"></mat-icon>
+  <span>{{ status }}</span>
+</div>

@@ -8,7 +8,7 @@
     <ul fxLayout="row" fxLayoutGap="16px">
       <li>
         <a
-          [routerLink]="['/incidents']"
+          routerLink="/incidents"
           routerLinkActive="active-link"
           mat-button
           >Incidents</a
@@ -16,7 +16,7 @@
       </li>
       <li *ngIf="isUser">
         <a
-          [routerLink]="['/create-incident']"
+          routerLink="/create-incident"
           routerLinkActive="active-link"
           mat-button
           >Create Incident</a

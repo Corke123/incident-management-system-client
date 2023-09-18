@@ -1,0 +1,66 @@
+.container {
+  padding: 16px 20rem;
+}
+
+.image-container,
+.details-container {
+  padding: 8px;
+}
+
+.map-container {
+  padding: 0 8px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28.13px;
+  color: #4f4f4f;
+}
+
+.subtitle {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #bdbdbd;
+}
+
+.text {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.actions-container {
+  padding: 8px 0;
+}
+
+.status {
+  width: 100px;
+  height: 24px;
+  border-radius: 11px;
+  text-align: center;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.approved {
+  background-color: #65b32e;
+}
+
+.pending {
+  background-color: #6dc6da;
+}
+
+.deleted {
+  background-color: #ea592a;
+}

@@ -6,5 +6,5 @@ export interface Incident {
   latitude: number;
   createdAt: Date;
   updatedAt: Date;
-  approved: boolean;
+  status: string;
 }

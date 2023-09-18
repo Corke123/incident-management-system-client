@@ -175,6 +175,12 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  onMarkerClick(incidentId: string) {
+    this.router.navigate([`${incidentId}`], {
+      relativeTo: this.route,
+    });
+  }
+
   ngOnDestroy(): void {
     this.zoomSubscription.unsubscribe();
     this.dragSubscription.unsubscribe();
