@@ -20,8 +20,23 @@
         </div>
       </div>
 
-      <h6 class="subtitle">Description</h6>
-      <p class="text">{{ incident.description }}</p>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+        <h6 class="subtitle">Description</h6>
+        <button mat-icon-button color="primary" matTooltip="Translate to English" (click)="onTranslate()">
+          <mat-icon
+            ><span class="material-symbols-outlined">
+              g_translate
+            </span></mat-icon
+          >
+        </button>
+      </div>
+      <div fxLayout="column">
+        <p class="text">{{ incident.description }}</p>
+        <mat-divider *ngIf="translatedDescription"></mat-divider>
+        <p class="text" *ngIf="translatedDescription">
+          {{ translatedDescription }}
+        </p>
+      </div>
     </div>
     <div
       fxFlexFill

@@ -7,6 +7,8 @@ import { KeycloakService } from 'keycloak-angular';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { TranslationService } from 'src/app/shared/translation/translation.service';
+import { TranslationResponse } from 'src/app/shared/translation/translation-response.model';
 
 @Component({
   selector: 'app-incident-detail',
@@ -16,10 +18,12 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 export class IncidentDetailComponent implements OnInit {
   incident: Incident;
   isModerator = false;
+  translatedDescription = '';
 
   constructor(
     private incidentService: IncidentService,
     private snackbarService: SnackbarService,
+    private translationService: TranslationService,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
@@ -97,6 +101,16 @@ export class IncidentDetailComponent implements OnInit {
             },
           });
       }
+    });
+  }
+
+  onTranslate() {
+    console.log('Translate description: ' + this.incident.description);
+    this.translationService.translateText(this.incident.description).subscribe({
+      next: (translationResponse: TranslationResponse) =>
+        (this.translatedDescription = translationResponse.text),
+      error: () =>
+        this.snackbarService.showSnackBar('Unable to translate description'),
     });
   }
 }
