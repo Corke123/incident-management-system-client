@@ -30,6 +30,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const materialModules = [
   CdkTreeModule,
@@ -67,6 +68,7 @@ const materialModules = [
   MatInputModule,
   MatButtonModule,
   MatTooltipModule,
+  MatBadgeModule,
 ];
 
 @NgModule({

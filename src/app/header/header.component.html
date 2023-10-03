@@ -6,11 +6,18 @@
   <span>Incident management system</span>
   <nav>
     <ul fxLayout="row" fxLayoutGap="16px">
-      <li>
+      <li *ngIf="isModerator">
         <a
-          routerLink="/incidents"
           routerLinkActive="active-link"
           mat-button
+          [matBadge]="notificationsCount || null"
+          matBadgeColor="accent"
+          (click)="onNotificationsClick()"
+          >Notifications</a
+        >
+      </li>
+      <li>
+        <a routerLink="/incidents" routerLinkActive="active-link" mat-button
           >Incidents</a
         >
       </li>

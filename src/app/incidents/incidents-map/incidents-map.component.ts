@@ -78,7 +78,6 @@ export class IncidentsMapComponent implements OnInit, AfterViewInit, OnDestroy {
   private fetchIncidents(params: IncidentParams) {
     this.incidentService.getIncidents(params).subscribe({
       next: (incidents: Incident[]) => {
-        this.snackbarService.showSnackBar('Updated incidents');
         this.incidents = incidents;
         console.log(incidents);
       },

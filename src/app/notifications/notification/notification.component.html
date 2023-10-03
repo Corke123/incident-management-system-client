@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title
+      >Possible duplicate to incident
+      <a [routerLink]="'/incidents/' + notification.incidentId">{{
+        notification.incidentId
+      }}</a>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayout="column">
+    <section *ngFor="let duplicate of notification.relatedIncidents">
+      <a [routerLink]="'/incidents/' + duplicate">{{ duplicate }}</a>
+    </section>
+  </mat-card-content>
+</mat-card>

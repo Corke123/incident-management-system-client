@@ -5,6 +5,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
 import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
 import { PageNotFoundComponent } from './incidents/page-not-found/page-not-found.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'incidents/not-found',
-    component: PageNotFoundComponent
+    component: PageNotFoundComponent,
   },
   {
     path: 'incidents/:id',
@@ -25,6 +26,14 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     data: {
       roles: ['USER'],
+    },
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      roles: ['MODERATOR'],
     },
   },
   { path: '', redirectTo: '/incidents', pathMatch: 'full' },

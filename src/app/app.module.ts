@@ -24,6 +24,8 @@ import {
 } from '@angular/common';
 import { environment } from 'src/environments/environment.development';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationComponent } from './notifications/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     PageNotFoundComponent,
     StatusComponent,
     ConfirmDialogComponent,
+    NotificationsComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

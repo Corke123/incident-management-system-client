@@ -4,6 +4,7 @@ import { TypeService } from '../types/type.service';
 import { SnackbarService } from 'src/app/shared/snackbar/snackbar.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IncidentService } from '../incident.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-incident',
@@ -39,7 +40,8 @@ export class CreateIncidentComponent implements OnInit {
   constructor(
     private typeService: TypeService,
     private incidentService: IncidentService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -142,7 +144,8 @@ export class CreateIncidentComponent implements OnInit {
     const image = this.incidentForm.value.image!;
     this.incidentService.uploadIncident(incidentRequest, image).subscribe({
       next: (createdIncident) => {
-        this.snackbarService.showSnackBar('Incident added. TODO redirect');
+        this.snackbarService.showSnackBar('Successfully created a new incident');
+        this.router.navigate(['incidents']);
       },
       error: (error) => {
         this.snackbarService.showSnackBar('Error occured');

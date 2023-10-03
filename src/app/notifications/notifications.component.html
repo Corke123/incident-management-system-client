@@ -1,0 +1,7 @@
+<div class="container" fxLayout="column" fxLayoutGap="8px">
+  <h4 *ngIf="notifications.length === 0">There are no new notifications</h4>
+  <app-notification
+    *ngFor="let notification of notifications"
+    [notification]="notification"
+  ></app-notification>
+</div>
